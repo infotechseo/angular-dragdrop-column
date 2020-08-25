@@ -1,0 +1,22 @@
+<mat-table cdkDropList 
+           cdkDropListOrientation="horizontal"
+           (cdkDropListDropped)="tableDrop($event)"
+           [dataSource]="dataSource">
+
+  <ng-container *ngFor="let column of columns; let i = index"
+                [matColumnDef]="column.name">
+
+    <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x">
+      {{ column.title }}
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let element">{{ element[column.name] }}</mat-cell>
+
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"
+                  class="tableHeaderRow"
+                  #tableHeaderRow></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
